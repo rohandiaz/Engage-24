@@ -147,7 +147,7 @@ const RecipeSearch = () => {
                 type="text"
                 value={cuisine}
                 onChange={(e) => setCuisine(e.target.value)}
-                placeholder="Enter cuisine (e.g., Mediterranean)"
+                placeholder="Enter cuisine (e.g., indian, italian)"
                 className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none dark:bg-gray-800 dark:text-white dark:border-gray-600"
               />
             </div>
