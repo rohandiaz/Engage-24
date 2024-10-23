@@ -19,6 +19,7 @@ app.use(cors({
     optionSuccessStatus: 200
 }));
 
+
 const PORT = process.env.PORT || 8000;
 
 connectDB().then(() => {
