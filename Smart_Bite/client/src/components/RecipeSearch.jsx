@@ -28,6 +28,7 @@ const RecipeSearch = () => {
         headers: {
           'Content-Type': 'application/json',
         },
+        
         body: JSON.stringify({ cuisine, calories: parseInt(calories) }),
       });
 
