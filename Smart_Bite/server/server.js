@@ -14,7 +14,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: '*',
+    origin: 'https://smart-bite.onrender.com',
     credentials: true,
     optionSuccessStatus: 200
 }));
