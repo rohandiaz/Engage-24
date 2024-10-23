@@ -1,9 +1,8 @@
-import {Recipe} from '../models/recipe.model.js';
-
+import { Recipe } from '../models/recipe.model.js';
 
 export const searchRecipe = async (req, res) => {
     try {
-        const { cuisine, calories } = req.body; // Change this line
+        const { cuisine, calories } = req.body;
         const calorieLimit = parseFloat(calories);
 
         // Define the range for calorie filtering
@@ -11,14 +10,26 @@ export const searchRecipe = async (req, res) => {
         const upperLimit = calorieLimit; // Upper limit based on user input
 
         // Query to search for recipes by cuisine and calories within the specified range
-        const recipes = await Recipe.find({
+        let recipes = await Recipe.find({
             cuisine: cuisine,
-            calories: { $gte: lowerLimit, $lte: upperLimit } // Get recipes within the range
+            calories: { $gte: lowerLimit, $lte: upperLimit }
         }).sort({ calories: 1 }); // Sort by calories in ascending order
 
+        // Remove duplicate recipes with the same title and calories
+        const uniqueRecipes = [];
+        const recipeMap = new Map(); // To track unique title-calories pairs
+
+        recipes.forEach((recipe) => {
+            const key = `${recipe.title}-${recipe.calories}`;
+            if (!recipeMap.has(key)) {
+                recipeMap.set(key, true); // Mark this combination as seen
+                uniqueRecipes.push(recipe); // Add unique recipe to the list
+            }
+        });
+
         // Send response only once
-        if (recipes.length > 0) {
-            return res.json(recipes); // Use return to stop execution here
+        if (uniqueRecipes.length > 0) {
+            return res.json(uniqueRecipes); // Use return to stop execution here
         } else {
             return res.status(404).json({ message: 'No recipes found.' });
         }
@@ -52,12 +63,12 @@ export const addRecipe = async (req, res) => {
 
 export const deleteRecipe = async (req, res) => {
     try {
-        const { id } = req.params; // Get the recipe ID from the request parameters
+        const { id } = req.params;
 
-        // Attempt to delete the recipe
+       
         const deletedRecipe = await Recipe.findByIdAndDelete(id);
 
-        // Check if the recipe was found and deleted
+       
         if (deletedRecipe) {
             return res.status(200).json({ message: 'Recipe deleted successfully.' });
         } else {

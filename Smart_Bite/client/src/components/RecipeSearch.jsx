@@ -20,8 +20,7 @@ const RecipeSearch = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    setRecipes([]); // Reset recipes to an empty array before searching
-
+    setRecipes([]); 
     try {
       const response = await fetch('https://engage-24.onrender.com/api/v1/recipe/find-recipes', {
         method: 'POST',
@@ -45,18 +44,18 @@ const RecipeSearch = () => {
       setRecipes(data);
     } catch (err) {
       setError(err.message);
-      setRecipes([]); // Reset recipes when there's an error
+      setRecipes([]); 
     } finally {
       setLoading(false);
     }
   };
 
   const calculateCalories = () => {
-    // Modify BMR calculation for gender
+   
     if (weight && height && age && activityLevel) {
       const bmr = gender === 'male'
-        ? 10 * weight + 6.25 * height - 5 * age + 5 // Mifflin-St Jeor for men
-        : 10 * weight + 6.25 * height - 5 * age - 161; // Mifflin-St Jeor for women
+        ? 10 * weight + 6.25 * height - 5 * age + 5 
+        : 10 * weight + 6.25 * height - 5 * age - 161;
 
       const activityFactor = activityLevel === 'sedentary' ? 1.2 :
         activityLevel === 'lightly active' ? 1.375 :
@@ -65,8 +64,8 @@ const RecipeSearch = () => {
 
       const maintenance = bmr * activityFactor;
       setMaintenanceCalories(maintenance);
-      setFatLossCalories(maintenance * 0.85); // 15% less for fat loss
-      setMuscleGainCalories(maintenance * 1.15); // 15% more for muscle gain
+      setFatLossCalories(maintenance * 0.85); 
+      setMuscleGainCalories(maintenance * 1.15); 
     }
   };
 
