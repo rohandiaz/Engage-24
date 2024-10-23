@@ -23,12 +23,12 @@ const RecipeSearch = () => {
     setRecipes([]); // Reset recipes to an empty array before searching
 
     try {
-      const response = await fetch('https://engage-24.onrender.com', {
+      const response = await fetch('https://engage-24.onrender.com/api/v1/recipe/find-recipes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        
+
         body: JSON.stringify({ cuisine, calories: parseInt(calories) }),
       });
 
