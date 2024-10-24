@@ -11,8 +11,10 @@ Welcome to **Smart Bite**, a recipe suggester application that provides personal
 ## Tech Stack
 
 - **Frontend**: React, Tailwind CSS
+- **Backend**: Express, Mongoose, MongoDB
 - **API**: Edamam API for fetching recipes and nutritional data
 - **Deployment**: Render
+
 
 ## Deployment
 
@@ -31,7 +33,7 @@ To run this project locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/smart-bite.git
+   git clone https://github.com/rohandiaz/Engage-24.git
 
     ## Installation
 
